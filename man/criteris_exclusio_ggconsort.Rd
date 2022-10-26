@@ -2,10 +2,10 @@
 % Please edit documentation in R/criteris_exclusio_ggconsort.R
 \name{criteris_exclusio_ggconsort}
 \alias{criteris_exclusio_ggconsort}
-\title{Aplica criteris partir d'una llista de n criteris d'exclusió que estan en un fitxer extern (Tipo excel)}
+\title{Aplica criteris partir d'una llista de n criteris d'exclusió}
 \usage{
 criteris_exclusio_ggconsort(
-  dt = dades,
+  dt = "dades",
   taulavariables = "VARIABLES_R3b.xls",
   criteris = "exclusio1",
   missings = T,
@@ -13,11 +13,15 @@ criteris_exclusio_ggconsort(
 )
 }
 \arguments{
-\item{dt}{dataframe/tibble}
+\item{dt}{Dataframe/tibble}
 
-\item{taulavariables}{string referent a path o tibble on hi ha una columna consten les exclusions: "conductor_cars.xls"}
+\item{taulavariables}{String referent a path o tibble on hi ha una columna consten les exclusions: "conductor_cars.xls"}
 
-\item{criteris}{string referent a la columna on consten les exclusions}
+\item{criteris}{String referent a la columna on consten les exclusions}
+
+\item{missings}{Logic TRUE/FALSE  (De moment no operatiu)}
+
+\item{...}{Altres parametres}
 }
 \description{
 Aplica criteris partir d'una llista de n criteris d'exclusió que estan en un fitxer extern (Tipo excel)

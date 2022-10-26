@@ -2,7 +2,7 @@
 % Please edit documentation in R/Generar_flow_chart_consort.R
 \name{Generar_flow_chart_consort}
 \alias{Generar_flow_chart_consort}
-\title{Dibuixa un flow_chart_ggconsort a partir d'una llista de n criteris d'exclusió que estan en un fitxer extern (Tipo excel)}
+\title{Dibuixa un flow_chart_ggconsort}
 \usage{
 Generar_flow_chart_consort(
   dt = iris,
@@ -19,25 +19,27 @@ Generar_flow_chart_consort(
 )
 }
 \arguments{
-\item{dt}{dataframe/tibble}
+\item{dt}{Dataframe/tibble}
 
-\item{taulavariables}{string referent a path o tibble on hi ha una columna consten les exclusions: "conductor_cars.xls"}
+\item{taulavariables}{String referent a path o tibble on hi ha una columna consten les exclusions: "conductor_cars.xls"}
 
-\item{camp}{string referent al nom de la columna de les variables implicades (Inecesari)}
+\item{camp}{String referent al nom de la columna de les variables implicades (Inecesari)}
 
-\item{criteris}{string referent a la columna on consten les exclusions}
+\item{criteris}{String referent a la columna on consten les exclusions}
 
-\item{grups}{string referent al grup de dues categories}
+\item{grups}{String referent al grup de dues categories}
 
-\item{missings}{logic TRUE/FALSE  (De moment no operatiu)}
+\item{missings}{Logic TRUE/FALSE  (De moment no operatiu)}
 
-\item{sequencial}{logic TRUE/FALSE . Exclusions sequencials o No}
+\item{sequencial}{Logic TRUE/FALSE . Exclusions sequencials o No}
 
-\item{labels}{string nom del camp on hi ha les etiquetes de les exclusions (Optatiu)}
+\item{labels}{String nom del camp on hi ha les etiquetes de les exclusions (Optatiu)}
 
-\item{lab_start}{string referida a la etiqueta de l acaixa d'inici (default "Assessed for eligibility" )}
+\item{lab_start}{String referida a la etiqueta de l acaixa d'inici (default "Assessed for eligibility" )}
 
-\item{lab_random}{string referida a la etiqueta de caixa post exclusions (default "Analyzed sample" )}
+\item{lab_random}{String referida a la etiqueta de caixa post exclusions (default "Analyzed sample" )}
+
+\item{...}{Altres parametres}
 }
 \description{
 Dibuixa un flow_chart_ggconsort a partir d'una llista de n criteris d'exclusió que estan en un fitxer extern (Tipo excel)

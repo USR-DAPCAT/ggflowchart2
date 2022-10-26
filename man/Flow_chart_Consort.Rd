@@ -2,7 +2,7 @@
 % Please edit documentation in R/Flow_chart_Consort.R
 \name{Flow_chart_Consort}
 \alias{Flow_chart_Consort}
-\title{Dibuixa un flow_chart_ggconsort a partir d'una llista de n criteris d'exclusió}
+\title{Dibuixa un flow_chart_ggconsort}
 \usage{
 Flow_chart_Consort(
   dt = ggconsort::trial_data,
@@ -15,30 +15,28 @@ Flow_chart_Consort(
 )
 }
 \arguments{
-\item{dt}{dataframe/tibble}
+\item{dt}{Dataframe/tibble}
 
-\item{exclusions}{vector de n strings amb la definició del criteris: exclusions=c("Sepal.Length < 5","Species=='setosa'") o dicotomics}
+\item{exclusions}{Vector de n strings amb la definicio del criteris:exclusions=c("Sepal.Length < 5","Species=='setosa'")odicotomics}
 
-\item{sequencial}{logic TRUE/FALSE . Exclusions sequencials o No}
+\item{sequencial}{Logic TRUE/FALSE . Exclusions sequencials o No}
 
-\item{grups}{string referent al grup de dues categories (Opcional)}
+\item{grups}{String referent al grup de dues categories (Opcional)}
 
-\item{lab_start}{string referida a la etiqueta de l acaixa d'inici (default "Assessed for eligibility" )}
+\item{lab_start}{String referida a la etiqueta de l acaixa d'inici (default "Assessed for eligibility" )}
 
-\item{lab_random}{string referida a la etiqueta de caixa post exclusions (default "Analyzed sample" )}
+\item{lab_random}{String referida a la etiqueta de caixa post exclusions (default "Analyzed sample" )}
 
-\item{lab_exclusions}{vector d'etiquetes referent a les N exclusions (Opcional)}
+\item{lab_exclusions}{Vector d'etiquetes referent a les N exclusions (Opcional)}
 }
 \description{
-Dibuixa un flow_chart_ggconsort a partir d'una llista de n criteris d'exclusió
+Dibuixa un flow_chart_ggconsort a partir d'una llista de n criteris d'exclusio
 }
 \examples{
-
-
-
 Flow_chart_Consort(dt=ggconsort::trial_data,
                   exclusions=c("declined","prior_chemo","bone_mets"),sequencial=TRUE,grups=NA,
                    lab_start="Assessed for eligibility",
                    lab_random="Analyzed sample",
                    lab_exclusions=NULL)
+                   
 }

@@ -1,33 +1,19 @@
-#' Dibuixa un flow_chart_ggconsort a partir d'una llista de n criteris d'exclusió que estan en un fitxer extern (Tipo excel)
-#'
-#' @param dt dataframe/tibble
-#'
-#' @param taulavariables string referent a path o tibble on hi ha una columna consten les exclusions: "conductor_cars.xls"
-#'
-#' @param camp string referent al nom de la columna de les variables implicades (Inecesari)
-#'
-#' @param criteris string referent a la columna on consten les exclusions
-#'
-#' @param grups string referent al grup de dues categories
-#'
-#' @param missings logic TRUE/FALSE  (De moment no operatiu)
-#'
-#' @param sequencial logic TRUE/FALSE . Exclusions sequencials o No
-#'
-#' @param labels  string nom del camp on hi ha les etiquetes de les exclusions (Optatiu)
-#'
-#' @param lab_start string referida a la etiqueta de l acaixa d'inici (default "Assessed for eligibility" )
-#'
-#' @param lab_random string referida a la etiqueta de caixa post exclusions (default "Analyzed sample" )
-#'
-#' @import dplyr purrr ggplot2 tidyr ggconsort
-
-#' @export
-
+#' @title                Dibuixa un flow_chart_ggconsort 
+#' @description          Dibuixa un flow_chart_ggconsort a partir d'una llista de n criteris d'exclusió que estan en un fitxer extern (Tipo excel)
+#' @param dt             Dataframe/tibble
+#' @param taulavariables String referent a path o tibble on hi ha una columna consten les exclusions: "conductor_cars.xls"
+#' @param camp           String referent al nom de la columna de les variables implicades (Inecesari)
+#' @param criteris       String referent a la columna on consten les exclusions
+#' @param grups          String referent al grup de dues categories
+#' @param missings       Logic TRUE/FALSE  (De moment no operatiu)
+#' @param sequencial     Logic TRUE/FALSE . Exclusions sequencials o No
+#' @param labels         String nom del camp on hi ha les etiquetes de les exclusions (Optatiu)
+#' @param lab_start      String referida a la etiqueta de l acaixa d'inici (default "Assessed for eligibility" )
+#' @param lab_random     String referida a la etiqueta de caixa post exclusions (default "Analyzed sample" )
+#' @param ...            Altres parametres
+#' @importFrom           dplyr "%>%"
+#' @export               Generar_flow_chart_consort
 #' @examples
-
-
-
 Generar_flow_chart_consort<-function(dt=iris,
                                      taulavariables="conductor_cars.xls",
                                      camp="camp",criteris="exclusio",
@@ -86,7 +72,7 @@ Generar_flow_chart_consort<-function(dt=iris,
   exclusions=paste0("exclusio",c(1:num_excl))
 
   # labels si no s'han passat
-  if (is.null(labels)) variables<-variables %>% mutate(labels=criteris)
+  if (is.null(labels)) variables<-variables %>% dplyr::mutate(labels=criteris)
 
   # 3. Generar flow_chart
   Flow_chart_Consort(dt=dt_nova,

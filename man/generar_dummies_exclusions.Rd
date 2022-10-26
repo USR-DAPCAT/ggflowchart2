@@ -2,7 +2,7 @@
 % Please edit documentation in R/generar_dummies_exclusions.R
 \name{generar_dummies_exclusions}
 \alias{generar_dummies_exclusions}
-\title{Genera n variables dummis (exclusio1,exclusio2,....exclusion) segons criteris d'exclusio determinats}
+\title{Genera n variables dummis}
 \usage{
 generar_dummies_exclusions(
   dt = iris,
@@ -10,20 +10,17 @@ generar_dummies_exclusions(
 )
 }
 \arguments{
-\item{dt}{dataframe/tibble}
+\item{dt}{Dataframe/tibble}
 
-\item{criteris}{vector string amb la definició del criteris: criteris=c("Sepal.Length < 5","Species=='setosa'")}
+\item{criteris}{Vector string amb la definició del criteris: criteris=c("Sepal.Length < 5","Species=='setosa'")}
 }
 \value{
-data.frame o tibble amb n columnes tipo dummie (0/1) afegides referides a les n exclusions
+Data.frame o tibble amb n columnes tipo dummie (0/1) afegides referides a les n exclusions
 }
 \description{
 Genera n variables dummis (exclusio1,exclusio2,....exclusion) segons criteris d'exclusio determinats
 }
 \examples{
-
 generar_dummies_exclusions(dt=iris,criteris=c("Sepal.Length < 5","Species=='setosa'"))
-
-
 
 }

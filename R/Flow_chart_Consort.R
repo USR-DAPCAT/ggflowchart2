@@ -1,33 +1,21 @@
-#'  Dibuixa un flow_chart_ggconsort a partir d'una llista de n criteris d'exclusió
-#'
-#' @param dt dataframe/tibble
-#'
-#' @param exclusions vector de n strings amb la definició del criteris: exclusions=c("Sepal.Length < 5","Species=='setosa'") o dicotomics
-#'
-#' @param grups string referent al grup de dues categories (Opcional)
-#'
-#' @param sequencial logic TRUE/FALSE . Exclusions sequencials o No
-#'
-#' @param lab_start string referida a la etiqueta de l acaixa d'inici (default "Assessed for eligibility" )
-#'
-#' @param lab_random string referida a la etiqueta de caixa post exclusions (default "Analyzed sample" )
-#'
-#' @param lab_exclusions vector d'etiquetes referent a les N exclusions (Opcional)
-
-#' @import dplyr purrr ggplot2 tidyr ggconsort stats glue ggtext
-
-#' @export
-
+#' @title                Dibuixa un flow_chart_ggconsort 
+#' @description          Dibuixa un flow_chart_ggconsort a partir d'una llista de n criteris d'exclusio
+#' @param dt             Dataframe/tibble
+#' @param exclusions     Vector de n strings amb la definicio del criteris:exclusions=c("Sepal.Length < 5","Species=='setosa'")odicotomics
+#' @param grups          String referent al grup de dues categories (Opcional)
+#' @param sequencial     Logic TRUE/FALSE . Exclusions sequencials o No
+#' @param lab_start      String referida a la etiqueta de l acaixa d'inici (default "Assessed for eligibility" )
+#' @param lab_random     String referida a la etiqueta de caixa post exclusions (default "Analyzed sample" )
+#' @param lab_exclusions Vector d'etiquetes referent a les N exclusions (Opcional)
+#' @importFrom           dplyr "%>%"
+#' @export               Flow_chart_Consort
 #' @examples
-#'
-#'
-#'
 #' Flow_chart_Consort(dt=ggconsort::trial_data,
 #'                   exclusions=c("declined","prior_chemo","bone_mets"),sequencial=TRUE,grups=NA,
 #'                    lab_start="Assessed for eligibility",
 #'                    lab_random="Analyzed sample",
 #'                    lab_exclusions=NULL)
-
+#'                    
 Flow_chart_Consort<-function(dt=ggconsort::trial_data,
                              exclusions=c("declined","prior_chemo","bone_mets"),
                              sequencial=TRUE,
@@ -85,7 +73,7 @@ Flow_chart_Consort<-function(dt=ggconsort::trial_data,
   # Selecciono camps necessaris de dt (dades)
   if (is.na(grups))
   {dt<-dt %>%
-    dplyr::select(exclusions) %>% dplyr::mutate(grup="Overall",idp = row_number())
+    dplyr::select(exclusions) %>% dplyr::mutate(grup="Overall",idp = dplyr::row_number())
   grup<-"Overall"} else
   {dt<-dt %>% dplyr::select(exclusions,grup=grups) %>% dplyr::mutate(idp = dplyr::row_number())}
 
@@ -118,7 +106,7 @@ Flow_chart_Consort<-function(dt=ggconsort::trial_data,
   if (N_exc>1) {
     if (sequencial) {
       dtlist_exclusions<-
-        purrr::map2(dtlist_incl[1:(N_exc-1)],dtlist_incl[-1],~anti_join(.x,.y,by = "idp")) %>%
+        purrr::map2(dtlist_incl[1:(N_exc-1)],dtlist_incl[-1],~dplyr::anti_join(.x,.y,by = "idp")) %>%
         purrr::set_names(paste0("Excluded",c(2:N_exc)))} else {
 
           dtlist_exclusions<-c(2:N_exc) %>%
@@ -142,12 +130,12 @@ Flow_chart_Consort<-function(dt=ggconsort::trial_data,
       list(Excluded_total=dt_excluded_totals),
       dtlist_exclusions)
 
-  arglist = append(list(cohort_start(dt,lab_start)),
+  arglist = append(list(ggconsort::cohort_start(dt,lab_start)),
                    llistat_arguments)
 
   # Generar les cohorts via funció
   dades_cohorts<-
-    do.call(cohort_define,
+    do.call(ggconsort::cohort_define,
             arglist)
 
   # Provide text labels for cohorts ---------------------------
@@ -184,10 +172,10 @@ Flow_chart_Consort<-function(dt=ggconsort::trial_data,
   noms_exc<-paste0("Excluded",1:N_exc)
 
   caixa_exc<-noms_exc %>%
-    purrr::map_chr(~paste0('• {cohort_count_adorn(study_cohorts, ', .x,')}<br>')) %>%
+    purrr::map_chr(~paste0('• {ggconsort::cohort_count_adorn(study_cohorts, ', .x,')}<br>')) %>%
     glue::glue_collapse()
   caixa_exclusions<-paste0(
-    "{cohort_count_adorn(study_cohorts, Excluded_total)}<br>",
+    "{ggconsort::cohort_count_adorn(study_cohorts, Excluded_total)}<br>",
     caixa_exc)
 
 
@@ -256,12 +244,12 @@ Flow_chart_Consort<-function(dt=ggconsort::trial_data,
       ggconsort::theme_consort(margin_h = 8, margin_v = 1) +
       # you can include other ggplot geoms, as needed -------------
     ggtext::geom_richtext(
-      aes(x = 0, y = 10, label = "Allocation"),
+      ggplot2::aes(x = 0, y = 10, label = "Allocation"),
       fill = "#9bc0fc") } else
       {
         study_consort %>%
           ggplot2::ggplot() +
-          ggconsort::geom_consort() + xlim(-10,20) +
+          ggconsort::geom_consort() + ggplot2::xlim(-10,20) +
           ggconsort::theme_consort(margin_h = 10, margin_v = 1)
       }
 }

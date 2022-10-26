@@ -1,22 +1,13 @@
-#' Genera n variables dummis (exclusio1,exclusio2,....exclusion) segons criteris d'exclusio determinats
-
-
-#' @param dt dataframe/tibble
-#'
-#' @param criteris vector string amb la definició del criteris: criteris=c("Sepal.Length < 5","Species=='setosa'")
-#'
-#' @return data.frame o tibble amb n columnes tipo dummie (0/1) afegides referides a les n exclusions
-
-#' @import dplyr purrr
-
+#' @title               Genera n variables dummis
+#' @description         Genera n variables dummis (exclusio1,exclusio2,....exclusion) segons criteris d'exclusio determinats
+#' @param dt            Dataframe/tibble
+#' @param criteris      Vector string amb la definició del criteris: criteris=c("Sepal.Length < 5","Species=='setosa'")
+#' @return              Data.frame o tibble amb n columnes tipo dummie (0/1) afegides referides a les n exclusions
+#' @export              generar_dummies_exclusions
+#' @import              dplyr 
 #' @examples
-#'
 #' generar_dummies_exclusions(dt=iris,criteris=c("Sepal.Length < 5","Species=='setosa'"))
-#'
-#'
-#'
-#' @export
-
+#' 
 generar_dummies_exclusions<-function(dt=iris, criteris=c("Sepal.Length < 5","Species=='setosa'")) {
 
   # dt=dt
@@ -35,7 +26,7 @@ generar_dummies_exclusions<-function(dt=iris, criteris=c("Sepal.Length < 5","Spe
   # Juntar-ho tot
   # Truc per eliminar dumiis existents en dt
   vars_dt<-names(dt)[!names(dt)%in% c(names(dt_dumies))]
-  dt %>% select(vars_dt) %>% dplyr::bind_cols(dt_dumies)
+  dt %>% dplyr::select(vars_dt) %>% dplyr::bind_cols(dt_dumies)
 
 }
 
