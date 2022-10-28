@@ -20,7 +20,7 @@ generar_dummies_exclusions<-function(dt=iris, criteris=c("Sepal.Length < 5","Spe
 
   dt_dumies<-
     purrr::map2_dfc(criteris,cols_dummies,
-                    ~dplyr::transmute(dt,!!sym(.y):=eval(parse(text=.x)))
+                    ~dplyr::transmute(dt,!!dplyr::sym(.y):=eval(parse(text=.x)))
     ) %>% dplyr::mutate_all(as.numeric)
 
   # Juntar-ho tot

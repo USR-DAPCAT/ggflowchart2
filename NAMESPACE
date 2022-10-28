@@ -2,7 +2,12 @@
 
 export(Flow_chart_Consort)
 export(Generar_flow_chart_consort)
+export(criteris_exclusio_diagrama)
 export(criteris_exclusio_ggconsort)
+export(diagramaFlowchart)
+export(diagramaFlowchart1G)
+export(diagramaFlowchart2G)
+export(diagramaFlowchart3G)
 export(generar_dummies_exclusions)
 export(read_conductor)
 import(dplyr)
