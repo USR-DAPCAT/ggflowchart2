@@ -821,15 +821,15 @@ criteris_exclusio_diagrama<-function(dt=dades,
   # variables[is.na(variables)]<- 0
   # variables<-variables %>% dplyr::filter_(paste0(criteris,"!=0")) 
   
-  # Parar si no hi ha criteris d'exclusió
+  # Parar si no hi ha criteris d'exclusio
   if (variables %>% count() %>% as.numeric()==0) {
-    print("No hi ha criteris jejejj")
+    print("No hi ha criteris je ejj")
     return("Error") }
   
   ##  Elimino els espais en blanc de les variables factor
   dt<-dt %>% dplyr::mutate_if(is.factor,funs(stringr::str_trim(.))) 
   
-  ## Selecciono dades només de les variables implicades en el filtres 
+  ## Selecciono dades nomes de les variables implicades en el filtres 
   #llista_camps<-variables["camp"] 
   
   ## Dades amb variables implicades en els filtres
@@ -850,7 +850,7 @@ criteris_exclusio_diagrama<-function(dt=dades,
   #   dplyr::select_("camp",criteris,ordre) %>%
   #   tidyr::unite_("filtres", c("camp", criteris),sep="") 
   
-  # Genero la llista de filtres (versió millorada) 
+  # Genero la llista de filtres (versio millorada) 
   
   # caracters logics del filtre
   char_logics<-c(">",">=","<","<=","==","!=","is.na") %>% paste0(collapse = '|')
@@ -887,7 +887,7 @@ criteris_exclusio_diagrama<-function(dt=dades,
   if (missings==F) maco_criteris<-maco_criteris %>% filter(tipus_cri!="missing")  
   
   
-  ## Generar taula amb dades per cada criteri d'exclusió  
+  ## Generar taula amb dades per cada criteri d'exclusio  
   num_criteris<-data.frame()
   
   ## Generar dades dels critersi criteris 
@@ -964,7 +964,7 @@ criteris_exclusio_diagrama<-function(dt=dades,
   
   #[AQUI!]#Creem els parametres que posramen ald Diagrammer!i si tenim un factor, 
   #cada nivell del factor anira a una llista! 
-  ## I ara passar informació generada a vectors per passar-ho al diagrameR
+  ## I ara passar informacio generada a vectors per passar-ho al diagrameR
   
   # Etiquetes d'exclusions
   lab_exc<-taula_criteris[c("etiqueta_exclusio","grup")] %>% split(.$grup)
@@ -973,7 +973,7 @@ criteris_exclusio_diagrama<-function(dt=dades,
   # N d'esclusions 
   n_exc<-taula_criteris[c("n","grup")] %>% split(.$grup)
   
-  # Calcular N població final per cada grup (3x1)
+  # Calcular N poblacio final per cada grup (3x1)
   # Generar FILTRE
   filtre_total<-stringr::str_c(maco_criteris$filtres,collapse=" | ")
   filtre_total<-stringr::str_c("!(",filtre_total,")")
@@ -1005,7 +1005,7 @@ criteris_exclusio_diagrama<-function(dt=dades,
   pob_lab_grup3<-c(paste0("Group Pob.Inicial  ",grups2,     ": ",names(n_exc)[3]),paste0("Group Pob.Final  ",grups2,": ",names(n_exc)[3]))
   
   
-  # Si només hi ha un grup pob inicial es parametres inicials
+  # Si nomes hi ha un grup pob inicial es parametres inicials
   #-------------------------------------------------------------------------------#
   if ( ngrups==1) {
     pob_lab_grup1<-pob_lab

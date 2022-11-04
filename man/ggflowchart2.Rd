@@ -5,7 +5,7 @@
 \alias{ggflowchart2}
 \title{ggflowchart2 Package}
 \description{
-ggflowchart2 conté funcions per crear un diagrama de flux a partir de funcions de ggconsort i diagramma.
+ggflowchart2 conte funcions per crear un diagrama de flux a partir de funcions de ggconsort i diagramma.
 }
 \author{
 Jordi Real,Ray Puig \email{-jordireal@gmail.com-}

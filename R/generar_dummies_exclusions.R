@@ -1,7 +1,7 @@
 #' @title               Genera n variables dummis
 #' @description         Genera n variables dummis (exclusio1,exclusio2,....exclusion) segons criteris d'exclusio determinats
 #' @param dt            Dataframe/tibble
-#' @param criteris      Vector string amb la definició del criteris: criteris=c("Sepal.Length < 5","Species=='setosa'")
+#' @param criteris      Vector string amb la definicio del criteris: criteris=c("Sepal.Length < 5","Species=='setosa'")
 #' @return              Data.frame o tibble amb n columnes tipo dummie (0/1) afegides referides a les n exclusions
 #' @export              generar_dummies_exclusions
 #' @import              dplyr 
@@ -14,7 +14,7 @@ generar_dummies_exclusions<-function(dt=iris, criteris=c("Sepal.Length < 5","Spe
   # criteris=exclusions
   # dt=dt, criteris=exclusions
 
-  # Generar dummies segons criteris d'inclusió
+  # Generar dummies segons criteris d inclusio
   num_excl<-criteris %>% length()
   cols_dummies<-paste0("exclusio",c(1:num_excl))
 

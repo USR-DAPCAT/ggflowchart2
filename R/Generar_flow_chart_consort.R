@@ -1,9 +1,9 @@
 #' @title                Dibuixa un flow_chart_ggconsort. 
 #' @description          Dibuixa un flow_chart_ggconsort a partir  llista de n criteris exclusio
-#' @param dt             Dataframe/tibble
+#' @param dt             Dataframe tibble
 #' @param exclusions     Vector de n strings amb la definicio del criteris:exclusions
 #' @param grups          String referent al grup de dues categories (Opcional)
-#' @param sequencial     Logic TRUE/FALSE Exclusions sequencials o No
+#' @param sequencial     Logic TRUE FALSE Exclusions sequencials o No
 #' @param lab_start      String referida a la etiqueta de l acaixa inici (default -Assessed for eligibility- )
 #' @param lab_random     String referida a la etiqueta de caixa post exclusions (default "Analyzed sample" )
 #' @param lab_exclusions Vector etiquetes referent a les N exclusions (Opcional)
@@ -35,8 +35,9 @@ Flow_chart_Consort<-function(dt,
   # lab_start="Assessed for eligibility"
   # lab_random="Randomized"
   # lab_exclusions=NULL
-  
-  
+  #
+  # actualitzacio::
+  # devtools::install_github("jrealgatius/ggconsort")
   
   # Dicotomitzar
   subvector_a_canviar<-exclusions[exclusions %in% (dt %>% names())] %>% paste0("==1")
@@ -217,16 +218,16 @@ Flow_chart_Consort<-function(dt,
 
 
 #' @title                Dibuixa un flow_chart_ggconsort 
-#' @description          Dibuixa un flow_chart_ggconsort a partir d'una llista de n criteris d'exclusió que estan en un fitxer extern (Tipo excel)
-#' @param dt             Dataframe/tibble
+#' @description          Dibuixa un flow_chart_ggconsort a partir d una llista de n criteris d exclusio que estan en un fitxer extern (Tipo excel)
+#' @param dt             Dataframe tibble
 #' @param taulavariables String referent a path o tibble on hi ha una columna consten les exclusions: "conductor_cars.xls"
 #' @param camp           String referent al nom de la columna de les variables implicades (Inecesari)
 #' @param criteris       String referent a la columna on consten les exclusions
 #' @param grups          String referent al grup de dues categories
-#' @param missings       Logic TRUE/FALSE  (De moment no operatiu)
-#' @param sequencial     Logic TRUE/FALSE . Exclusions sequencials o No
+#' @param missings       Logic TRUE FALSE (De moment no operatiu)
+#' @param sequencial     Logic TRUE FALSE.Exclusions sequencials o No
 #' @param labels         String nom del camp on hi ha les etiquetes de les exclusions (Optatiu)
-#' @param lab_start      String referida a la etiqueta de l acaixa d'inici (default "Assessed for eligibility" )
+#' @param lab_start      String referida a la etiqueta de l acaixa d inici (default "Assessed for eligibility" )
 #' @param lab_random     String referida a la etiqueta de caixa post exclusions (default "Analyzed sample" )
 #' @param ...            Altres parametres
 #' @importFrom           dplyr "%>%"
@@ -253,7 +254,7 @@ Generar_flow_chart_consort<-function(dt=iris,
 
  
 
-  # 1. Obrir conductor d'exclusions del conductor
+  # 1. Obrir conductor d exclusions del conductor
 
   ##  Llegeixo criteris de variables i selecciono variables amb filtres
   variables <- read_conductor(taulavariables,col_types = "text",...)  %>%
@@ -262,10 +263,10 @@ Generar_flow_chart_consort<-function(dt=iris,
     # Filtrar valors
     dplyr::filter(!is.na(criteris))
 
-  # Parar si no hi ha criteris d'exclusió
+  # Parar si no hi ha criteris d exclusio
   num_excl<-variables$criteris %>% length()
   if (num_excl==0) {
-    print("No hi ha criteris jejejj")
+    print("No hi ha criteris !")
     return("Error") }
 
   # 2. Generar dummies
@@ -274,7 +275,7 @@ Generar_flow_chart_consort<-function(dt=iris,
   # Noves variables generades
   exclusions=paste0("exclusio",c(1:num_excl))
 
-  # labels si no s'han passat
+  # labels si no s han passat
   if (is.null(labels)) variables<-variables %>% dplyr::mutate(labels=criteris)
 
   # 3. Generar flow_chart
@@ -291,13 +292,13 @@ Generar_flow_chart_consort<-function(dt=iris,
 
 
 
-#' @title                      Aplica criteris partir d'una llista de n criteris d'exclusió
-#' @description                Aplica criteris partir d'una llista de n criteris d'exclusió que estan en un fitxer extern (Tipo excel)
-#' @param dt                   Dataframe/tibble
+#' @title                      Aplica criteris partir d una llista de n criteris exclusio
+#' @description                Aplica criteris partir d una llista de n criteris exclusio que estan en un fitxer extern (Tipo excel)
+#' @param dt                   Dataframe tibble
 #' @param taulavariables       String referent a path o tibble on hi ha una columna consten les exclusions: "conductor_cars.xls"
 #' @param criteris             String referent a la columna on consten les exclusions
-#' @param missings             Logic TRUE/FALSE  (De moment no operatiu)
-#' @param ...                  Altres parametres
+#' @param missings             Logic TRUE FALSE  (De moment no operatiu)
+#' @param ...                  Altres prametres
 #' @importFrom                 dplyr "%>%"
 #' @export                     criteris_exclusio_ggconsort
 criteris_exclusio_ggconsort<-function(dt="dades",
@@ -329,7 +330,7 @@ criteris_exclusio_ggconsort<-function(dt="dades",
   # llista de caracters logics del filtre
   char_logics<-c(">",">=","<","<=","==","!=","is.na") %>% paste0(collapse = '|')
   
-  ##  0. Filtro taula variables només variables implicades en el filtre i el genero
+  ##  0. Filtro taula variables nomes variables implicades en el filtre i el genero
   maco<-variables %>%
     dplyr::filter_(paste0(criteris,"!=0")) %>% dplyr::select_("camp",criteris) %>%
     dplyr::transmute_("camp","crit_temp"=criteris) %>%

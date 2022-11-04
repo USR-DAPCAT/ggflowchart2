@@ -12,7 +12,7 @@ generar_dummies_exclusions(
 \arguments{
 \item{dt}{Dataframe/tibble}
 
-\item{criteris}{Vector string amb la definició del criteris: criteris=c("Sepal.Length < 5","Species=='setosa'")}
+\item{criteris}{Vector string amb la definicio del criteris: criteris=c("Sepal.Length < 5","Species=='setosa'")}
 }
 \value{
 Data.frame o tibble amb n columnes tipo dummie (0/1) afegides referides a les n exclusions

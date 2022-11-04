@@ -1,6 +1,6 @@
 #' ggflowchart2 Package
 #'
-#' ggflowchart2 conté funcions per crear un diagrama de flux a partir de funcions de ggconsort i diagramma.
+#' ggflowchart2 conte funcions per crear un diagrama de flux a partir de funcions de ggconsort i diagramma.
 #'
 #' @docType package
 #'
