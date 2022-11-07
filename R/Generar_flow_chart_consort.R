@@ -237,7 +237,7 @@ Flow_chart_Consort<-function(dt,
 #' @export               Generar_flow_chart_consort
 #' 
 #' @examples
-#' k2<-Generar_flow_chart_consort<-function(
+#' KK<-Generar_flow_chart_consort(
 #' dt=iris,
 #' taulavariables=conductor_cars,
 #' camp="camp",
@@ -245,10 +245,11 @@ Flow_chart_Consort<-function(dt,
 #' grups=NA,
 #' missings=F,
 #' sequencial=T,
-#' labels=NULL,
+#' labels="descripcio",
 #' lab_start="Assessed for eligibility",
 #' lab_random="Analyzed sample")
-#' k2
+#' 
+#' KK
 Generar_flow_chart_consort<-function(dt=iris,
                                      taulavariables="conductor_cars.xls",
                                      camp="camp",
