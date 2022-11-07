@@ -44,3 +44,17 @@ Generar_flow_chart_consort(
 \description{
 Dibuixa un flow_chart_ggconsort a partir d una llista de n criteris d exclusio que estan en un fitxer extern (Tipo excel)
 }
+\examples{
+k2<-Generar_flow_chart_consort<-function(
+dt=iris,
+taulavariables=conductor_cars,
+camp="camp",
+criteris="exclusio",
+grups=NA,
+missings=F,
+sequencial=T,
+labels=NULL,
+lab_start="Assessed for eligibility",
+lab_random="Analyzed sample")
+k2
+}

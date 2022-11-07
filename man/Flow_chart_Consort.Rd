@@ -35,7 +35,9 @@ Dibuixa un flow_chart_ggconsort a partir  llista de n criteris exclusio
 \examples{
 
 k<-Flow_chart_Consort(dt=ggconsort::trial_data,
-                   exclusions=c("declined","prior_chemo","bone_mets"),sequencial=TRUE,grups=NA,
+                   exclusions=c("declined","prior_chemo","bone_mets"),
+                   sequencial=TRUE,
+                   grups=NA,
                    lab_start="Assessed for eligibility",
                    lab_random="Analyzed sample",
                    lab_exclusions=NULL)

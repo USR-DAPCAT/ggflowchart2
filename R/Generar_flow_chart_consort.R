@@ -12,7 +12,9 @@
 #' @examples
 #' 
 #' k<-Flow_chart_Consort(dt=ggconsort::trial_data,
-#'                    exclusions=c("declined","prior_chemo","bone_mets"),sequencial=TRUE,grups=NA,
+#'                    exclusions=c("declined","prior_chemo","bone_mets"),
+#'                    sequencial=TRUE,
+#'                    grups=NA,
 #'                    lab_start="Assessed for eligibility",
 #'                    lab_random="Analyzed sample",
 #'                    lab_exclusions=NULL)
@@ -27,6 +29,7 @@ Flow_chart_Consort<-function(dt,
 {
   
   # Testing
+  
   # dt=dt_nova
   # exclusions= exclusions
   # lab_exclusions=variables$labels
@@ -232,9 +235,24 @@ Flow_chart_Consort<-function(dt,
 #' @param ...            Altres parametres
 #' @importFrom           dplyr "%>%"
 #' @export               Generar_flow_chart_consort
+#' 
+#' @examples
+#' k2<-Generar_flow_chart_consort<-function(
+#' dt=iris,
+#' taulavariables=conductor_cars,
+#' camp="camp",
+#' criteris="exclusio",
+#' grups=NA,
+#' missings=F,
+#' sequencial=T,
+#' labels=NULL,
+#' lab_start="Assessed for eligibility",
+#' lab_random="Analyzed sample")
+#' k2
 Generar_flow_chart_consort<-function(dt=iris,
                                      taulavariables="conductor_cars.xls",
-                                     camp="camp",criteris="exclusio",
+                                     camp="camp",
+                                     criteris="exclusio",
                                      grups=NA,
                                      missings=F,
                                      sequencial=T,
@@ -246,22 +264,27 @@ Generar_flow_chart_consort<-function(dt=iris,
 
  
   # dt=iris
-  # taulavariables="conductor_cars.xls"
+  # taulavariables=conductor_cars
   # camp="camp"
   # criteris="exclusio"
+  # grups=NA
   # missings=F
+  # sequencial=T
   # labels="descripcio"
-
+  # lab_start="Assessed for eligibility"
+  # lab_random="Analyzed sample"
  
 
   # 1. Obrir conductor d exclusions del conductor
 
   ##  Llegeixo criteris de variables i selecciono variables amb filtres
   variables <- read_conductor(taulavariables,col_types = "text",...)  %>%
-    # variables <- read_conductor(taulavariables,col_types = "text",sheet="criteris_exclusio")  %>%
+    # variables <- read_conductor(taulavariables,col_types = "text")  %>%
+    # variables <- read_conductor(taulavariables,col_types = "text",sheet="criteris_exclusio")%>%
     dplyr::select(camp=!!camp,criteris=!!criteris, labels=!!labels) %>%
     # Filtrar valors
-    dplyr::filter(!is.na(criteris))
+    dplyr::filter(!is.na(criteris)) %>% 
+    dplyr::filter(criteris!="") 
 
   # Parar si no hi ha criteris d exclusio
   num_excl<-variables$criteris %>% length()
@@ -273,8 +296,11 @@ Generar_flow_chart_consort<-function(dt=iris,
   dt_nova<-generar_dummies_exclusions(dt=dt,criteris=variables$criteris)
 
   # Noves variables generades
-  exclusions=paste0("exclusio",c(1:num_excl))
-
+  exclusions<-paste0("exclusio",c(1:num_excl))
+  
+  #exclusions<-paste0("exclusio",c(1:2))
+  #exclusions<-c("exclusio1","exclusio5")
+  
   # labels si no s han passat
   if (is.null(labels)) variables<-variables %>% dplyr::mutate(labels=criteris)
 
