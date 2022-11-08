@@ -244,7 +244,7 @@ Flow_chart_Consort<-function(dt,
 #' criteris="exclusio",
 #' grups=NA,
 #' missings=F,
-#' sequencial=T,
+#' sequencial=TRUE,
 #' labels="descripcio",
 #' lab_start="Assessed for eligibility",
 #' lab_random="Analyzed sample")
@@ -328,17 +328,25 @@ Generar_flow_chart_consort<-function(dt=iris,
 #' @param ...                  Altres prametres
 #' @importFrom                 dplyr "%>%"
 #' @export                     criteris_exclusio_ggconsort
+#' 
+#' @examples
+#' KK2<-criteris_exclusio_ggconsort(
+#' dt=iris,
+#' taulavariables=conductor_cars,
+#'  criteris="exclusio",
+#'  missings=TRUE,)
+#' 
+#' KK2
 criteris_exclusio_ggconsort<-function(dt="dades",
                                       taulavariables="VARIABLES_R3b.xls",
                                       criteris="exclusio1",
                                       missings=T,
                                       ...) {
   
-  # dt=dades
-  # taulavariables=conductor
-  # sheet="Exclusions"
-  # criteris="exclusio"
-  # missings=T
+   #dt=iris
+   #taulavariables=conductor_cars
+   #criteris="exclusio"
+   #missings=T
   
   
   ##  2. Eliminar els espais en blanc de les variables factors del data.frame
@@ -348,10 +356,28 @@ criteris_exclusio_ggconsort<-function(dt="dades",
   
   ##  Llegeix criteris de variables
   variables <- read_conductor(taulavariables,col_types = "text",...) %>% tidyr::as_tibble() %>% dplyr::select(camp,!!criteris)
-  # variables <- read_conductor(taulavariables,col_types = "text",sheet=sheet) %>% tidyr::as_tibble() %>% dplyr::select(camp,!!criteris)
-  # Filtrar valors
+  #variables <- read_conductor(taulavariables,col_types = "text",sheet=sheet) %>% tidyr::as_tibble() %>% dplyr::select(camp,!!criteris)
+    
   criteris_sym<-sym(criteris)
-  variables<-variables %>% dplyr::filter(!is.na(!!criteris_sym))
+  variables<-variables %>%dplyr::filter(!is.na(!!criteris_sym)) %>% dplyr::filter(!!criteris_sym!="")
+     
+  # Filtrar valors
+  #dplyr::filter(!is.na(criteris)) %>% 
+  #dplyr::filter(criteris!="") 
+  
+  
+  # variables <- read_conductor(taulavariables,col_types = "text",sheet=sheet) %>% tidyr::as_tibble() %>% dplyr::select(camp,!!criteris)%>%
+  # Filtrar valors
+  
+  
+  # Filtrar valors
+  
+  
+  
+  ##criteris_sym<-sym(criteris)
+  ##variables<-variables %>% dplyr::filter(!is.na(!!criteris_sym))
+  
+  
   # variables[is.na(variables)]<- 0
   
   # llista de caracters logics del filtre

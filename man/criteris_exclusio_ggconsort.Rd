@@ -26,3 +26,12 @@ criteris_exclusio_ggconsort(
 \description{
 Aplica criteris partir d una llista de n criteris exclusio que estan en un fitxer extern (Tipo excel)
 }
+\examples{
+KK2<-criteris_exclusio_ggconsort(
+dt=iris,
+taulavariables=conductor_cars,
+ criteris="exclusio",
+ missings=TRUE,)
+
+KK2
+}

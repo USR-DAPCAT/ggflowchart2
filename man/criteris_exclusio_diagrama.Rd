@@ -47,3 +47,27 @@ criteris_exclusio_diagrama(
 \description{
 Criteris_exclusio_diagrama
 }
+\examples{
+
+conductor_cars<-conductor_cars\%>\%select(-exclusio)
+exclusio=c("<5","","","","setosa")
+conductor_cars2<-data.frame(conductor_cars,exclusio)
+exc_ordre=c("1","","","","2")
+conductor_cars2<-data.frame(conductor_cars2,exclusio,exc_ordre)
+
+
+k2<-criteris_exclusio_diagrama(
+dt=iris,
+taulavariables=conductor_cars2,
+criteris="exc_pre",
+ordre="exc_ordre",
+grups=NA,
+etiquetes="descripcio",
+sequencial = TRUE,
+pob_lab=c("Pob inicial","Pob final"),
+colors=c("white","grey"),
+forma=c("ellipse","box"))
+
+k2
+
+}

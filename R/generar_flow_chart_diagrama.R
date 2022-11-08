@@ -779,6 +779,30 @@ diagramaFlowchart3G<-function(
 #' @param ...               Altres parametres
 #' @importFrom              dplyr "%>%"
 #' @export                  criteris_exclusio_diagrama
+#' @examples
+#' 
+#' conductor_cars<-conductor_cars%>%select(-exclusio)
+#' exclusio=c("<5","","","","setosa")
+#' conductor_cars2<-data.frame(conductor_cars,exclusio)
+#' exc_ordre=c("1","","","","2")
+#' conductor_cars2<-data.frame(conductor_cars2,exclusio,exc_ordre)
+#' 
+#' 
+#' k2<-criteris_exclusio_diagrama(
+#' dt=iris,
+#' taulavariables=conductor_cars2,
+#' criteris="exc_pre",
+#' ordre="exc_ordre",
+#' grups=NA,
+#' etiquetes="descripcio",
+#' sequencial = TRUE,
+#' pob_lab=c("Pob inicial","Pob final"),
+#' colors=c("white","grey"),
+#' forma=c("ellipse","box"))
+#' 
+#' k2
+#' 
+
 criteris_exclusio_diagrama<-function(dt=dades,
                                      taulavariables="VARIABLES_R3b.xls",
                                      criteris="exclusio1",
@@ -788,20 +812,26 @@ criteris_exclusio_diagrama<-function(dt=dades,
                                      grups=NA,
                                      sequencial=F,
                                      colors=c("white","grey"),
-                                     forma=c("ellipse","box"), missings=T,...){
+                                     forma=c("ellipse","box"), 
+                                     missings=T,...){
   
-  # dt=dt_matching
-  # taulavariables=conductor
-  # criteris="exc_pre"
-  # ordre="exc_ordre"
-  # grups="grup"
-  # etiquetes="descripcio"
-  # 
-  # pob_lab=c("Pob inicial","Pob final")
-  # sequencial=F
-  # colors=c("white","grey")
-  # forma=c("ellipse","box")
-  # missings=F
+  
+  dt=iris
+  taulavariables=conductor_cars2
+  criteris="exclusio"
+  ordre="exc_ordre"
+  grups=NA
+  etiquetes="descripcio"
+  sequencial = TRUE
+  pob_lab=c("Pob inicial","Pob final")
+  colors=c("white","grey")
+  forma=c("ellipse","box")
+  missings=F
+  
+  #dt<-dt%>%mutate(exclusio1=ifelse(Sepal.Length<5,1,0))
+  #dt<-dt%>%mutate(exclusio2=ifelse(Species=="setosa" ,1,0))
+  #dt<-mutate_at(dt, vars( starts_with("exclusio") ), funs( if_else(.==0  | is.na(.)  ,0,1)))
+  
   
   grups2=grups
   ### Si hi ha grups capturar el nombre categories
@@ -815,11 +845,17 @@ criteris_exclusio_diagrama<-function(dt=dades,
   
   ##  Llegeixo criteris de variables i selecciono variables amb filtres 
   variables <- read_conductor(taulavariables,col_types = "text",...)  %>% tidyr::as_tibble() %>% dplyr::select(camp,!!etiquetes,!!ordre,!!criteris)
+  variables <- read_conductor(taulavariables,col_types = "text")  %>% tidyr::as_tibble() %>% dplyr::select(camp,!!etiquetes,!!ordre,!!criteris)
+  
   # Filtrar valors
-  criteris_sym<-sym(criteris)
-  variables<-variables %>% dplyr::filter(!is.na(!!criteris_sym))
+  ##criteris_sym<-sym(criteris)
+  ##variables<-variables %>% dplyr::filter(!is.na(!!criteris_sym))
   # variables[is.na(variables)]<- 0
   # variables<-variables %>% dplyr::filter_(paste0(criteris,"!=0")) 
+  
+  criteris_sym<-sym(criteris)
+  variables<-variables %>%dplyr::filter(!is.na(!!criteris_sym)) %>% dplyr::filter(!!criteris_sym!="")
+  
   
   # Parar si no hi ha criteris d'exclusio
   if (variables %>% count() %>% as.numeric()==0) {
@@ -895,9 +931,9 @@ criteris_exclusio_diagrama<-function(dt=dades,
   
   for (i in 1: length(maco_criteris$filtres)){
     
-    #i<-3
+    #i<-1
     kk<-maco_criteris[i,]$filtres
-    datatemp2<-datatemp2 %>%dplyr::mutate(dumy=(if_else(eval(parse(text=kk)),1,0,missing =NULL)),
+    datatemp2<-datatemp2 %>%dplyr::mutate(dumy=(dplyr::if_else(eval(parse(text=kk)),1,0,missing =NULL)),
                                           dumy = tidyr::replace_na(dumy, 0))
     
     dades_criteris<-datatemp2 %>% 
@@ -968,7 +1004,7 @@ criteris_exclusio_diagrama<-function(dt=dades,
   
   # Etiquetes d'exclusions
   lab_exc<-taula_criteris[c("etiqueta_exclusio","grup")] %>% split(.$grup)
-  lab_exc<-lab_exc[[1]]$etiqueta_exclusio %>% purrr::as_vector
+  lab_exc<-lab_exc[[1]]$etiqueta_exclusio %>% as.vector()
   
   # N d'esclusions 
   n_exc<-taula_criteris[c("n","grup")] %>% split(.$grup)
@@ -1011,7 +1047,7 @@ criteris_exclusio_diagrama<-function(dt=dades,
     pob_lab_grup1<-pob_lab
     pob_lab_grup2<-pob_lab
     pob_lab_grup3<-pob_lab
-    exc1=n_exc[[1]]$n %>%purrr::as_vector
+    exc1=n_exc[[1]]$n %>% as.vector()
     exc_lab1=lab_exc
     pob1=n_pob1
     pob_lab1=pob_lab_grup1
@@ -1020,8 +1056,8 @@ criteris_exclusio_diagrama<-function(dt=dades,
   if ( ngrups==2) {
     pob=Npob_inicial
     pob_lab=Etiqueta_pob_inicial
-    exc1=n_exc[[1]]$n %>%purrr::as_vector
-    exc2=n_exc[[2]]$n %>%purrr::as_vector
+    exc1=n_exc[[1]]$n %>%as.vector()
+    exc2=n_exc[[2]]$n %>%as.vector()
     exc_lab1=lab_exc
     exc_lab2=lab_exc
     pob1=n_pob1
@@ -1033,9 +1069,9 @@ criteris_exclusio_diagrama<-function(dt=dades,
   if ( ngrups==3) {
     pob=Npob_inicial
     pob_lab=Etiqueta_pob_inicial
-    exc1=n_exc[[1]]$n %>%purrr::as_vector
-    exc2=n_exc[[2]]$n %>%purrr::as_vector
-    exc3=n_exc[[3]]$n %>%purrr::as_vector
+    exc1=n_exc[[1]]$n %>%as.vector()
+    exc2=n_exc[[2]]$n %>%as.vector()
+    exc3=n_exc[[3]]$n %>%as.vector()
     exc_lab1=lab_exc
     exc_lab2=lab_exc
     exc_lab3=lab_exc
@@ -1079,4 +1115,7 @@ criteris_exclusio_diagrama<-function(dt=dades,
   
   
 }
+
+
+
 
