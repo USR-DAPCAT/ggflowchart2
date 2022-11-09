@@ -1,5 +1,5 @@
-#' @title                Dibuixa un flow_chart_ggconsort. 
-#' @description          Dibuixa un flow_chart_ggconsort a partir  llista de n criteris exclusio
+#' @title                Dibuixa un Flow chart ggconsort 
+#' @description          Dibuixa un Flow chart ggconsort  a partir  llista de n criteris exclusio
 #' @param dt             Dataframe tibble
 #' @param exclusions     Vector de n strings amb la definicio del criteris:exclusions
 #' @param grups          String referent al grup de dues categories (Opcional)
@@ -220,8 +220,8 @@ Flow_chart_Consort<-function(dt,
 }
 
 
-#' @title                Dibuixa un flow_chart_ggconsort 
-#' @description          Dibuixa un flow_chart_ggconsort a partir d una llista de n criteris d exclusio que estan en un fitxer extern (Tipo excel)
+#' @title                Dibuixa un Flow Chart Ggconsort a partir del Conductor 
+#' @description          Dibuixa un flow_chart ggconsort a partir d una llista de n criteris d exclusio que estan en un fitxer extern (Tipo excel)
 #' @param dt             Dataframe tibble
 #' @param taulavariables String referent a path o tibble on hi ha una columna consten les exclusions: "conductor_cars.xls"
 #' @param camp           String referent al nom de la columna de les variables implicades (Inecesari)
@@ -241,7 +241,7 @@ Flow_chart_Consort<-function(dt,
 #' dt=iris,
 #' taulavariables=conductor_cars,
 #' camp="camp",
-#' criteris="exclusio",
+#' criteris="exclusio2",
 #' grups=NA,
 #' missings=F,
 #' sequencial=TRUE,
@@ -333,7 +333,7 @@ Generar_flow_chart_consort<-function(dt=iris,
 #' KK2<-criteris_exclusio_ggconsort(
 #' dt=iris,
 #' taulavariables=conductor_cars,
-#'  criteris="exclusio",
+#'  criteris="exclusio2",
 #'  missings=TRUE,)
 #' 
 #' KK2

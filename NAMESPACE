@@ -2,8 +2,10 @@
 
 export(Flow_chart_Consort)
 export(Generar_flow_chart_consort)
+export(criteris_exclusio)
 export(criteris_exclusio_diagrama)
 export(criteris_exclusio_ggconsort)
+export(criteris_exclusio_taula)
 export(diagramaFlowchart)
 export(diagramaFlowchart1G)
 export(diagramaFlowchart2G)

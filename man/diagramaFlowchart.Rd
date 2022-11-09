@@ -2,7 +2,7 @@
 % Please edit documentation in R/generar_flow_chart_diagrama.R
 \name{diagramaFlowchart}
 \alias{diagramaFlowchart}
-\title{Diagrama Flowchart}
+\title{Dibuixa un Flow Chart Diagrama}
 \usage{
 diagramaFlowchart(
   grups = 3,
@@ -60,7 +60,7 @@ diagramaFlowchart(
 \item{forma}{Forma}
 }
 \description{
-Diagrama Flowchart
+Dibuixa un Flow Chart Diagrama
 }
 \examples{
 

@@ -2,12 +2,12 @@
 % Please edit documentation in R/generar_flow_chart_diagrama.R
 \name{criteris_exclusio_diagrama}
 \alias{criteris_exclusio_diagrama}
-\title{Criteris_exclusio_diagrama}
+\title{Dibuixa un Flow Chart Diagrama a partir del Conductor}
 \usage{
 criteris_exclusio_diagrama(
   dt = dades,
   taulavariables = "VARIABLES_R3b.xls",
-  criteris = "exclusio1",
+  criteris = "exclusio",
   pob_lab = c("Pob inicial", "Pob final"),
   etiquetes = "etiqueta_exclusio",
   ordre = "exc_ordre",
@@ -45,21 +45,16 @@ criteris_exclusio_diagrama(
 \item{...}{Altres parametres}
 }
 \description{
-Criteris_exclusio_diagrama
+Dibuixa un Flow Chart Diagrama a partir del Conductor
 }
 \examples{
 
-conductor_cars<-conductor_cars\%>\%select(-exclusio)
-exclusio=c("<5","","","","setosa")
-conductor_cars2<-data.frame(conductor_cars,exclusio)
-exc_ordre=c("1","","","","2")
-conductor_cars2<-data.frame(conductor_cars2,exclusio,exc_ordre)
-
+conductor_cars
 
 k2<-criteris_exclusio_diagrama(
 dt=iris,
-taulavariables=conductor_cars2,
-criteris="exc_pre",
+taulavariables=conductor_cars,
+criteris="exclusio",
 ordre="exc_ordre",
 grups=NA,
 etiquetes="descripcio",
