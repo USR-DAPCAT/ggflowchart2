@@ -782,13 +782,14 @@ diagramaFlowchart3G<-function(
 #' @examples
 #' 
 #' conductor_cars
+#' exemple
 #' 
 #' k2<-criteris_exclusio_diagrama(
-#' dt=iris,
+#' dt=exemple,
 #' taulavariables=conductor_cars,
 #' criteris="exclusio",
 #' ordre="exc_ordre",
-#' grups=NA,
+#' grups="lloc",
 #' etiquetes="descripcio",
 #' sequencial = TRUE,
 #' pob_lab=c("Pob inicial","Pob final"),
@@ -811,11 +812,12 @@ criteris_exclusio_diagrama<-function(dt=dades,
                                      missings=T,...){
   
   
+  
   #dt=iris
   #taulavariables=conductor_cars
   #criteris="exclusio"
   #ordre="exc_ordre"
-  #grups=NA
+  #grups="Species"
   #etiquetes="descripcio"
   #sequencial = TRUE
   #pob_lab=c("Pob inicial","Pob final")
@@ -837,9 +839,16 @@ criteris_exclusio_diagrama<-function(dt=dades,
   
   ##  Llegeixo criteris de variables i selecciono variables amb filtres 
   variables <- read_conductor(taulavariables,col_types = "text",...)%>%
-    tidyr::as_tibble()%>%
+   tidyr::as_tibble()%>%
       dplyr::select(camp,!!etiquetes,!!ordre,!!criteris)
   
+  variables <- read_conductor(taulavariables,col_types = "text")%>%  
+    tidyr::as_tibble()%>%
+    dplyr::select(camp,!!etiquetes,!!ordre,!!criteris)
+  
+  ###
+  #
+  #
   #variables <- read_conductor(taulavariables,col_types = "text")
   #%>% tidyr::as_tibble() %>% dplyr::select(camp,!!etiquetes,!!ordre,!!criteris)
   
@@ -1026,9 +1035,14 @@ criteris_exclusio_diagrama<-function(dt=dades,
   
   #  Generar Etiquetes: Pob inicial i final x grup 
   #-------------------------------------------------------------------------------#
-  pob<-datatemp0%>% dplyr::summarise (n=n()) %>% dplyr::select(n) %>% as.vector
-  pob.i<-datatemp0 %>%dplyr:: group_by(grup) %>% dplyr::summarise (n=n()) %>% dplyr::select(n) %>% as.vector
-  pob.f<-datatemp %>% dplyr::group_by(grup) %>% dplyr::summarise (n=n()) %>% dplyr::select(n) %>% as.vector
+  pob<-  datatemp0%>% dplyr:: summarise(n=n()) %>% dplyr::select(n) %>% as.vector
+  #-------------------------------------------------------------------------------#
+  #pob.i<-vector("numeric",ngrups)
+  #pob.f<-vector("numeric",ngrups)
+  #??
+  #-------------------------------------------------------------------------------#
+  pob.i<-datatemp0%>% dplyr:: group_by(grup) %>% dplyr::summarise (n=n()) %>% dplyr::select(n) %>% as.vector
+  pob.f<-datatemp %>% dplyr:: group_by(grup) %>% dplyr::summarise (n=n()) %>% dplyr::select(n) %>% as.vector
   #-------------------------------------------------------------------------------#
   
   n_pob1<-c(pob.i$n[1],pob.f$n[1])
@@ -1039,7 +1053,7 @@ criteris_exclusio_diagrama<-function(dt=dades,
   #  Generar Etiquetes: Pob inicial i final x grup 
   #  Etiquetes grups
   
-  pob_lab_grup1<-c(paste0("Group Pob.Inicial  ",grups2,    ":  ",names(n_exc)[1]),paste0("Group Pob.Final  ",grups2,": ",names(n_exc)[1]))
+  pob_lab_grup1<-c(paste0("Group Pob.Inicial  ",grups2,     ": ",names(n_exc)[1]),paste0("Group Pob.Final  ",grups2,": ",names(n_exc)[1]))
   pob_lab_grup2<-c(paste0("Group Pob.Inicial  ",grups2,     ": ",names(n_exc)[2]),paste0("Group Pob.Final  ",grups2,": ",names(n_exc)[2]))
   pob_lab_grup3<-c(paste0("Group Pob.Inicial  ",grups2,     ": ",names(n_exc)[3]),paste0("Group Pob.Final  ",grups2,": ",names(n_exc)[3]))
   

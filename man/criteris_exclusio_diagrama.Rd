@@ -50,13 +50,14 @@ Dibuixa un Flow Chart Diagrama a partir del Conductor
 \examples{
 
 conductor_cars
+exemple
 
 k2<-criteris_exclusio_diagrama(
-dt=iris,
+dt=exemple,
 taulavariables=conductor_cars,
 criteris="exclusio",
 ordre="exc_ordre",
-grups=NA,
+grups="lloc",
 etiquetes="descripcio",
 sequencial = TRUE,
 pob_lab=c("Pob inicial","Pob final"),
