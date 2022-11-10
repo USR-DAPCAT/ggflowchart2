@@ -6,7 +6,7 @@ Date: 2022-10-28
 Author: Jordi Real,Ray Puig
 Maintainer: Jordi Real <jordireal@gmail.com>
 Description: ggflowchart2 conté funcions per crear un diagrama de flux a partir de funcions de ggconsort
- i diagramma.
+ i diagramma.Si volem aplicar ggconsort, hem de actualitzar devtools::install_github("jrealgatius/ggflowchart").
 License: GPL(>=3)
 Encoding: UTF-8
 LazyData: true
@@ -29,4 +29,5 @@ Imports:
       purrr,
       ggconsort,
       DiagrammeR,
-      rlang
+      rlang,
+      devtools

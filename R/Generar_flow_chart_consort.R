@@ -43,6 +43,9 @@ Flow_chart_Consort<-function(dt,
   # devtools::install_github("jrealgatius/ggconsort")
   
   # Dicotomitzar
+  
+  
+  
   subvector_a_canviar<-exclusions[exclusions %in% (dt %>% names())] %>% paste0("==1")
   exclusions[exclusions %in% (dt %>% names())]<-subvector_a_canviar
   dt<-generar_dummies_exclusions(dt=dt, criteris=exclusions)
