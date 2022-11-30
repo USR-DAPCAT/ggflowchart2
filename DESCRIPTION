@@ -31,3 +31,7 @@ Imports:
       DiagrammeR,
       rlang,
       devtools
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
